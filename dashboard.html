@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; color: #000000; -webkit-text-stroke: #000000}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; color: #000000; -webkit-text-stroke: #000000; min-height: 14.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; color: #d5ffff; -webkit-text-stroke: #000000; background-color: #000000; min-height: 14.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; color: #d5ffff; -webkit-text-stroke: #000000; background-color: #000000}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Courier; color: #d5ffff; -webkit-text-stroke: #000000; background-color: #000000}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Courier; color: #d5ffff; -webkit-text-stroke: rgba(202, 221, 253, 0.7); background-color: #000000}
+    span.s1 {font-kerning: none}
+    span.s2 {font-kerning: none; -webkit-text-stroke: 0px rgba(202, 221, 253, 0.7)}
+    span.s3 {font-kerning: none; -webkit-text-stroke: 0px #000000}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1">&lt;!DOCTYPE html&gt;</span></p>
+<p class="p1"><span class="s1">&lt;html lang="en"&gt;</span></p>
+<p class="p1"><span class="s1">&lt;head&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;meta charset="UTF-8" /&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;title&gt;Firebase Enrollment Control&lt;/title&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;style&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>body { font-family: Arial, sans-serif; padding: 20px; background: #eef2f7; }</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>button {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>padding: 12px 24px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>font-size: 16px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>cursor: pointer;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border-radius: 5px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border: none;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>background-color: #007bff;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>color: white;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>transition: background-color 0.3s;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>button:hover { background-color: #0056b3; }</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>#status { margin-top: 20px; font-weight: 600; }</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/style&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/head&gt;</span></p>
+<p class="p1"><span class="s1">&lt;body&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;h1&gt;Enrollment Control Dashboard&lt;/h1&gt;</span></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  </span>&lt;p&gt;Current Enrollment Status: &lt;span id="enrollStatus"&gt;Loading...&lt;/span&gt;&lt;/p&gt;</span></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  </span>&lt;button id="triggerEnrollBtn"&gt;Trigger Enrollment (Set to TRUE)&lt;/button&gt;</span></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div id="status"&gt;&lt;/div&gt;</span></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  </span>&lt;!-- Firebase SDK --&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  </span>&lt;script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"&gt;&lt;/script&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  </span>&lt;script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"&gt;&lt;/script&gt;</span></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  </span>&lt;script&gt;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>// Replace with your Firebase config</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>const firebaseConfig = {</span></p>
+<p class="p5"><span class="s1"><span class="Apple-converted-space">     </span></span><span class="s2">apiKey: </span><span class="s1">"AIzaSyB-K6nGV5voDG3sR7bBX_c2ikHrwUGobHo"</span><span class="s2">,</span></p>
+<p class="p5"><span class="s2">  authDomain: </span><span class="s1">"attendence-1a708.firebaseapp.com"</span><span class="s2">,</span></p>
+<p class="p5"><span class="s2">  databaseURL: </span><span class="s1">"https://attendence-1a708-default-rtdb.asia-southeast1.firebasedatabase.app"</span><span class="s2">,</span></p>
+<p class="p5"><span class="s2">  projectId: </span><span class="s1">"attendence-1a708"</span><span class="s2">,</span></p>
+<p class="p5"><span class="s2">  storageBucket: </span><span class="s1">"attendence-1a708.firebasestorage.app"</span><span class="s2">,</span></p>
+<p class="p6"><span class="s1">  messagingSenderId: </span><span class="s3">"861384352568"</span><span class="s1">,</span></p>
+<p class="p5"><span class="s2">  appId: </span><span class="s1">"1:861384352568:web:0d29020a32192c3af697cd"</span><span class="s2">,</span></p>
+<p class="p5"><span class="s2">  measurementId: </span><span class="s1">"G-4C7HG41ZML"<span class="Apple-converted-space">    </span>};</span></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>// Initialize Firebase</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>firebase.initializeApp(firebaseConfig);</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>const db = firebase.database();</span></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>const enrollStatusSpan = document.getElementById('enrollStatus');</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>const triggerEnrollBtn = document.getElementById('triggerEnrollBtn');</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>const statusDiv = document.getElementById('status');</span></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>const enrollPath = '/control/enroll';</span></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>// Function to fetch current status and display it</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>function fetchEnrollStatus() {</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">      </span>db.ref(enrollPath).get()</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>.then((snapshot) =&gt; {</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">          </span>if (snapshot.exists()) {</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>enrollStatusSpan.textContent = snapshot.val() ? 'TRUE' : 'FALSE';</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">          </span>} else {</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">            </span>enrollStatusSpan.textContent = 'NOT SET';</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">          </span>}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>})</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>.catch((error) =&gt; {</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">          </span>enrollStatusSpan.textContent = 'ERROR';</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">          </span>console.error('Error fetching enroll status:', error);</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>});</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>// Initial fetch</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>fetchEnrollStatus();</span></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>// Set /control/enroll to true on button click</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>triggerEnrollBtn.addEventListener('click', () =&gt; {</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">      </span>statusDiv.textContent = 'Triggering enrollment...';</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">      </span>db.ref(enrollPath).set(true)</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>.then(() =&gt; {</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">          </span>statusDiv.textContent = 'Enrollment triggered successfully!';</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">          </span>enrollStatusSpan.textContent = 'TRUE';</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>})</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>.catch((error) =&gt; {</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">          </span>statusDiv.textContent = 'Error triggering enrollment: ' + error.message;</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>});</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>});</span></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>// Optional: Listen for realtime changes on the enroll path and update UI automatically</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>db.ref(enrollPath).on('value', (snapshot) =&gt; {</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">      </span>if (snapshot.exists()) {</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>enrollStatusSpan.textContent = snapshot.val() ? 'TRUE' : 'FALSE';</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">      </span>} else {</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">        </span>enrollStatusSpan.textContent = 'NOT SET';</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">      </span>}</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">    </span>});</span></p>
+<p class="p4"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/script&gt;</span></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p4"><span class="s1">&lt;/body&gt;</span></p>
+<p class="p4"><span class="s1">&lt;/html&gt;</span></p>
+</body>
+</html>
